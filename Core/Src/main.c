@@ -30,6 +30,10 @@
 
 /* Private define ------------------------------------------------------------*/
 /* USER CODE BEGIN PD */
+#define T_GIRO_90 430U
+#define T_GIRO_120 (T_GIRO_90 * 120U / 90U)
+#define T_GIRO_180 (T_GIRO_90 * 2U)
+#define T_GIRO_60   286
 
 /* USER CODE END PD */
 
@@ -53,6 +57,15 @@ static void MX_GPIO_Init(void);
 
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
+void detener(uint16_t duracion){
+  HAL_GPIO_WritePin(GPIOA, EN_Pin, GPIO_PIN_RESET);
+  HAL_GPIO_WritePin(GPIOA, AR_Pin, GPIO_PIN_RESET);
+  HAL_GPIO_WritePin(GPIOA, AL_Pin, GPIO_PIN_RESET);
+  HAL_GPIO_WritePin(GPIOA, BR_Pin, GPIO_PIN_RESET);
+  HAL_GPIO_WritePin(GPIOA, BL_Pin, GPIO_PIN_RESET);
+  HAL_Delay(duracion);
+}
+
 void adelante(uint16_t duracion){
   HAL_GPIO_WritePin(GPIOA, EN_Pin, GPIO_PIN_SET);
   HAL_GPIO_WritePin(GPIOA, AR_Pin, GPIO_PIN_SET);
@@ -60,8 +73,8 @@ void adelante(uint16_t duracion){
   HAL_GPIO_WritePin(GPIOA, BR_Pin, GPIO_PIN_SET);
   HAL_GPIO_WritePin(GPIOA, BL_Pin, GPIO_PIN_RESET);
   HAL_Delay(duracion);
-
 }
+
 void atras(uint16_t duracion){
   HAL_GPIO_WritePin(GPIOA, EN_Pin, GPIO_PIN_SET);
   HAL_GPIO_WritePin(GPIOA, AR_Pin, GPIO_PIN_RESET);
@@ -69,8 +82,8 @@ void atras(uint16_t duracion){
   HAL_GPIO_WritePin(GPIOA, BR_Pin, GPIO_PIN_RESET);
   HAL_GPIO_WritePin(GPIOA, BL_Pin, GPIO_PIN_SET);
   HAL_Delay(duracion);
-
 }
+
 void derecha(uint16_t duracion){
   HAL_GPIO_WritePin(GPIOA, EN_Pin, GPIO_PIN_SET);
   HAL_GPIO_WritePin(GPIOA, AR_Pin, GPIO_PIN_SET);
@@ -78,8 +91,8 @@ void derecha(uint16_t duracion){
   HAL_GPIO_WritePin(GPIOA, BR_Pin, GPIO_PIN_RESET);
   HAL_GPIO_WritePin(GPIOA, BL_Pin, GPIO_PIN_SET);
   HAL_Delay(duracion);
-
 }
+
 void izquierda(uint16_t duracion){
   HAL_GPIO_WritePin(GPIOA, EN_Pin, GPIO_PIN_SET);
   HAL_GPIO_WritePin(GPIOA, AR_Pin, GPIO_PIN_RESET);
@@ -87,7 +100,36 @@ void izquierda(uint16_t duracion){
   HAL_GPIO_WritePin(GPIOA, BR_Pin, GPIO_PIN_SET);
   HAL_GPIO_WritePin(GPIOA, BL_Pin, GPIO_PIN_RESET);
   HAL_Delay(duracion);
+}
 
+//Triángulo
+void triangulo(void){
+  for(int i = 0; i < 3; i++){
+    adelante(2000);
+    detener(200);
+    derecha(T_GIRO_120);
+    detener(200);
+  }
+}
+
+
+
+void cuadrado(void){
+  for(int i = 0; i < 4; i++){
+    adelante(2000);        
+    detener(200);
+    derecha(T_GIRO_90);   
+    detener(200);
+  }
+}
+
+void hexagono(void){
+  for(int i = 0; i < 6; i++){
+    adelante(1500);
+    detener(200);
+    derecha(T_GIRO_60);     // giro exterior de 60°
+    detener(200);
+  }
 }
 /* USER CODE END 0 */
 
@@ -129,21 +171,15 @@ int main(void)
   while (1)
   {
     /* USER CODE END WHILE */
-    adelante(3000);
-    derecha(430);
-    adelante(3000);
-    derecha(430);
-    adelante(3000);
-    derecha(430);
-    adelante(3000);
-    derecha(430);
-    izquierda(430);
-    atras(3000);
-    izquierda(430);
-    atras(3000);
-    izquierda(430);
-    atras(3000);
-    HAL_Delay(100);
+    cuadrado();
+    detener(2000);
+    triangulo();
+    detener(2000);
+    hexagono();
+    detener(3000);  
+    
+    /* USER CODE BEGIN 3 */
+  
     /* USER CODE BEGIN 3 */
   }
   /* USER CODE END 3 */
