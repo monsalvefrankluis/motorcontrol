@@ -59,46 +59,46 @@ static void MX_GPIO_Init(void);
 /* USER CODE BEGIN 0 */
 void detener(uint16_t duracion){
   HAL_GPIO_WritePin(GPIOA, EN_Pin, GPIO_PIN_RESET);
-  HAL_GPIO_WritePin(GPIOA, AR_Pin, GPIO_PIN_RESET);
-  HAL_GPIO_WritePin(GPIOA, AL_Pin, GPIO_PIN_RESET);
-  HAL_GPIO_WritePin(GPIOA, BR_Pin, GPIO_PIN_RESET);
-  HAL_GPIO_WritePin(GPIOA, BL_Pin, GPIO_PIN_RESET);
+  HAL_GPIO_WritePin(GPIOA, AR1_Pin, GPIO_PIN_RESET);
+  HAL_GPIO_WritePin(GPIOA, AL2_Pin, GPIO_PIN_RESET);
+  HAL_GPIO_WritePin(GPIOA, BR1_Pin, GPIO_PIN_RESET);
+  HAL_GPIO_WritePin(GPIOA, BL2_Pin, GPIO_PIN_RESET);
   HAL_Delay(duracion);
 }
 
 void adelante(uint16_t duracion){
   HAL_GPIO_WritePin(GPIOA, EN_Pin, GPIO_PIN_SET);
-  HAL_GPIO_WritePin(GPIOA, AR_Pin, GPIO_PIN_SET);
-  HAL_GPIO_WritePin(GPIOA, AL_Pin, GPIO_PIN_RESET);
-  HAL_GPIO_WritePin(GPIOA, BR_Pin, GPIO_PIN_SET);
-  HAL_GPIO_WritePin(GPIOA, BL_Pin, GPIO_PIN_RESET);
+  HAL_GPIO_WritePin(GPIOA, AR1_Pin, GPIO_PIN_SET);
+  HAL_GPIO_WritePin(GPIOA, AL2_Pin, GPIO_PIN_RESET);
+  HAL_GPIO_WritePin(GPIOA, BR1_Pin, GPIO_PIN_SET);
+  HAL_GPIO_WritePin(GPIOA, BL2_Pin, GPIO_PIN_RESET);
   HAL_Delay(duracion);
 }
 
 void atras(uint16_t duracion){
   HAL_GPIO_WritePin(GPIOA, EN_Pin, GPIO_PIN_SET);
-  HAL_GPIO_WritePin(GPIOA, AR_Pin, GPIO_PIN_RESET);
-  HAL_GPIO_WritePin(GPIOA, AL_Pin, GPIO_PIN_SET);
-  HAL_GPIO_WritePin(GPIOA, BR_Pin, GPIO_PIN_RESET);
-  HAL_GPIO_WritePin(GPIOA, BL_Pin, GPIO_PIN_SET);
+  HAL_GPIO_WritePin(GPIOA, AR1_Pin, GPIO_PIN_RESET);
+  HAL_GPIO_WritePin(GPIOA, AL2_Pin, GPIO_PIN_SET);
+  HAL_GPIO_WritePin(GPIOA, BR1_Pin, GPIO_PIN_RESET);
+  HAL_GPIO_WritePin(GPIOA, BL2_Pin, GPIO_PIN_SET);
   HAL_Delay(duracion);
 }
 
 void derecha(uint16_t duracion){
   HAL_GPIO_WritePin(GPIOA, EN_Pin, GPIO_PIN_SET);
-  HAL_GPIO_WritePin(GPIOA, AR_Pin, GPIO_PIN_SET);
-  HAL_GPIO_WritePin(GPIOA, AL_Pin, GPIO_PIN_RESET);
-  HAL_GPIO_WritePin(GPIOA, BR_Pin, GPIO_PIN_RESET);
-  HAL_GPIO_WritePin(GPIOA, BL_Pin, GPIO_PIN_SET);
+  HAL_GPIO_WritePin(GPIOA, AR1_Pin, GPIO_PIN_SET);
+  HAL_GPIO_WritePin(GPIOA, AL2_Pin, GPIO_PIN_RESET);
+  HAL_GPIO_WritePin(GPIOA, BR1_Pin, GPIO_PIN_RESET);
+  HAL_GPIO_WritePin(GPIOA, BL2_Pin, GPIO_PIN_SET);
   HAL_Delay(duracion);
 }
 
 void izquierda(uint16_t duracion){
   HAL_GPIO_WritePin(GPIOA, EN_Pin, GPIO_PIN_SET);
-  HAL_GPIO_WritePin(GPIOA, AR_Pin, GPIO_PIN_RESET);
-  HAL_GPIO_WritePin(GPIOA, AL_Pin, GPIO_PIN_SET);
-  HAL_GPIO_WritePin(GPIOA, BR_Pin, GPIO_PIN_SET);
-  HAL_GPIO_WritePin(GPIOA, BL_Pin, GPIO_PIN_RESET);
+  HAL_GPIO_WritePin(GPIOA, AR1_Pin, GPIO_PIN_RESET);
+  HAL_GPIO_WritePin(GPIOA, AL2_Pin, GPIO_PIN_SET);
+  HAL_GPIO_WritePin(GPIOA, BR1_Pin, GPIO_PIN_SET);
+  HAL_GPIO_WritePin(GPIOA, BL2_Pin, GPIO_PIN_RESET);
   HAL_Delay(duracion);
 }
 
@@ -171,13 +171,12 @@ int main(void)
   while (1)
   {
     /* USER CODE END WHILE */
-    cuadrado();
-    detener(2000);
-    triangulo();
-    detener(2000);
     hexagono();
-    detener(3000);  
-    
+    HAL_Delay(1000);
+    triangulo();
+    HAL_Delay(1000);
+    cuadrado();
+    HAL_Delay(1000);
     /* USER CODE BEGIN 3 */
   
     /* USER CODE BEGIN 3 */
@@ -242,13 +241,13 @@ static void MX_GPIO_Init(void)
   __HAL_RCC_GPIOA_CLK_ENABLE();
 
   /*Configure GPIO pin Output Level */
-  HAL_GPIO_WritePin(GPIOA, EN_Pin|AR_Pin|AL_Pin|BR_Pin
-                          |BL_Pin, GPIO_PIN_RESET);
+  HAL_GPIO_WritePin(GPIOA, EN_Pin|AR1_Pin|AL2_Pin|BR1_Pin
+                          |BL2_Pin, GPIO_PIN_RESET);
 
-  /*Configure GPIO pins : EN_Pin AR_Pin AL_Pin BR_Pin
-                           BL_Pin */
-  GPIO_InitStruct.Pin = EN_Pin|AR_Pin|AL_Pin|BR_Pin
-                          |BL_Pin;
+  /*Configure GPIO pins : EN_Pin AR1_Pin AL2_Pin BR1_Pin
+                           BL2_Pin */
+  GPIO_InitStruct.Pin = EN_Pin|AR1_Pin|AL2_Pin|BR1_Pin
+                          |BL2_Pin;
   GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;

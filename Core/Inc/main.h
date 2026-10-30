@@ -59,14 +59,14 @@ void Error_Handler(void);
 /* Private defines -----------------------------------------------------------*/
 #define EN_Pin GPIO_PIN_0
 #define EN_GPIO_Port GPIOA
-#define AR_Pin GPIO_PIN_1
-#define AR_GPIO_Port GPIOA
-#define AL_Pin GPIO_PIN_2
-#define AL_GPIO_Port GPIOA
-#define BR_Pin GPIO_PIN_3
-#define BR_GPIO_Port GPIOA
-#define BL_Pin GPIO_PIN_4
-#define BL_GPIO_Port GPIOA
+#define AR1_Pin GPIO_PIN_1
+#define AR1_GPIO_Port GPIOA
+#define AL2_Pin GPIO_PIN_2
+#define AL2_GPIO_Port GPIOA
+#define BR1_Pin GPIO_PIN_3
+#define BR1_GPIO_Port GPIOA
+#define BL2_Pin GPIO_PIN_4
+#define BL2_GPIO_Port GPIOA
 
 /* USER CODE BEGIN Private defines */
 
